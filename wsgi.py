@@ -16,11 +16,11 @@ PORT = int(os.environ['LC_APP_PORT'])
 #MASTER_KEY = 'm9p1z9fvh0cmld8y09vwozel'
 #PORT = 3000
 
-if os.environ.get('LC_APP_PROD') == '1':
+#if os.environ.get('LC_APP_PROD') == '1':
     # 当前为生产环境
-elif os.environ.get('LC_APP_PROD') == '0':
+#elif os.environ.get('LC_APP_PROD') == '0':
     # 当前为测试环境
-else:
+#else:
     # 当前为开发环境
 
 leancloud.init(APP_ID, master_key=MASTER_KEY)
