@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import re, time, hashlib, logging
+import re, time, hashlib, logging, json, functools
 
 from leancloud import Object
 from leancloud import User
@@ -20,6 +20,51 @@ def _current_path():
 
 def _now():
     return datetime.now().strftime('%y-%m-%d_%H.%M.%S')
+
+
+def _dump(obj):
+    if isinstance(obj, Page):
+        return {
+            'page_index': obj.page_index,
+            'page_count': obj.page_count,
+            'item_count': obj.item_count,
+            'has_next': obj.has_next,
+            'has_previous': obj.has_previous
+        }
+    if isinstance(obj, Blog):
+        return {
+            'id': obj.id,
+            'name': obj.get('name'),
+            'summary': obj.get('summary'),
+            'content': obj.get('content'),
+            #'user_name': obj.get('user').get('username'),
+            'created_at': str(obj.created_at)
+        }
+    if isinstance(obj, Comments):
+        return {
+            'id': obj.id,
+            #'user_name': obj.get('user').get('username'),
+            'content': obj.get('content'),
+            'created_at': str(obj.created_at)
+        }
+    raise TypeError('%s is not JSON serializable' % obj)
+
+def dumps(obj):
+    return json.dumps(obj, default=_dump)
+
+def api(func):
+    @functools.wraps(func)
+    def _wrapper(*args, **kw):
+        try:
+            r = dumps(func(*args, **kw))
+        except Err, e:
+            r = json.dumps(dict(error=e.error, data=e.data, message=e.message))
+        except Exception, e:
+            logging.exception(e)
+            r = json.dumps(dict(error='internalerror', data=e.__class__.__name__, message=e.message))
+        make_response().headers['content-type'] = 'application/json'
+        return r
+    return _wrapper
 
 def make_signed_cookie(id, password, max_age):
     # build cookie string by: id-expires-md5
@@ -48,12 +93,14 @@ def check_login():
     cookie = request.cookies.get(_COOKIE_NAME)
     if cookie:
         user = parse_signed_cookie(cookie)
+    else:
+        user = None;
     if user is None:
         if _COOKIE_NAME in session:
             user = parse_signed_cookie(session[_COOKIE_NAME])
-    request.user = user
     return user;
 
+@api
 def sign_in(username, password):
     try:
         user = User().login(username, password)
@@ -71,6 +118,7 @@ def sign_in(username, password):
 _RE_EMAIL = re.compile(r'^[a-z0-9\.\-\_]+\@[a-z0-9\-\_]+(\.[a-z0-9\-\_]+){1,4}$')
 _RE_MD5 = re.compile(r'^[0-9a-f]{32}$')
 
+@api
 def sign_up(username, password, email):
     email = email.strip().lower()
     if not email or not _RE_EMAIL.match(email):
@@ -89,7 +137,39 @@ def sign_out():
     make_response().set_cookie(_COOKIE_NAME, None)
     session.pop(_COOKIE_NAME, None)
 
+@api
+def list_blogs():
+    format = request.args.get('format', '')
+    page_index = 1
+    page_size = 26
+    page = None
+    blogs = []
+    try:
+        page_index = int(request.args.get('page', '1'))
+    except ValueError:
+        pass
+    try:
+        total = Query(Blog).count();
+        page = Page(total, page_index, page_size)
+        blogs = Query(Blog).descending('createdAt').skip(page.offset).limit(page.page_size).find()
+    except LeanCloudError, e:
+        if e.code == 101:  # 服务端对应的 Class 还没创建
+            blogs = []
+        else:
+            raise e
+    if format=='html':
+        for blog in blogs:
+            blog.content = markdown2.markdown(blog.content)
+    return dict(blogs=blogs, page=page)
 
+@api
+def get_blog(blog_id):
+    blog = Query(Blog).get(blog_id)
+    if blog:
+        return blog
+    raise Err('value:notfound', 'blog', 'blog not found.')
+
+@api
 def update_blog(blog_id, name='', summary='', content=''):
     name = name.strip()
     summary = summary.strip()
@@ -101,10 +181,14 @@ def update_blog(blog_id, name='', summary='', content=''):
     if not content:
         raise Err('value:invalid', 'content', 'content cannot be empty.')
     user = check_login()
-    if user is None:
-        raise Err('value:notfound', 'user', 'user not found.')
+    #if user is None:
+        #raise Err('value:notfound', 'user', 'user not found.')
+    blog = None
     try:
         blog = Query(Blog).get(blog_id)
+    except LeanCloudError, e:
+        pass
+    try:
         if blog is None:
             blog = Blog(name=name, summary=summary, content=content, user=user)
         else:
@@ -116,6 +200,7 @@ def update_blog(blog_id, name='', summary='', content=''):
         raise e
     return blog
 
+@api
 def delete_blog(blog_id):
     blog = Query(Blog).get(blog_id)
     if blog is None:
@@ -123,6 +208,7 @@ def delete_blog(blog_id):
     blog.destroy()
     return blog
 
+@api
 def comment(blog_id, content=''):
     user = check_login()
     if user is None:
@@ -139,6 +225,7 @@ def comment(blog_id, content=''):
     
     return comment
 
+@api
 def update_comment(comment_id, content=''):
     #if user is None:
         #raise Err('value:notfound', 'user', 'user not found.')
@@ -152,6 +239,7 @@ def update_comment(comment_id, content=''):
     comment.save()
     return comment
 
+@api
 def delete_comment(comment_id):
     comment = Query(Comments).get(comment_id)
     if comment is None:

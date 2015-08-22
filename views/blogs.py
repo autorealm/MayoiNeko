@@ -11,6 +11,9 @@ from flask import redirect
 from flask import url_for
 from flask import render_template
 
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 sys.path.append("..")
 from develop.models import Blog, Comments, Page, Err
 import develop.markdown2
@@ -23,6 +26,7 @@ blogs_view = Blueprint('blogs', __name__)
 def list():
     page_index = 1
     page_size = 26
+    page = None
     try:
         page_index = int(request.args.get('page', '1'))
     except ValueError:
@@ -36,9 +40,9 @@ def list():
             blogs = []
         else:
             raise e
-    return render_template('blogs.html', page=page, blogs=blogs, user=user)
+    return render_template('blogs.html', blogs=blogs, page=page)
 
-@blogs_view.route('blog/<blog_id>')
+@blogs_view.route('<blog_id>')
 def show(blog_id):
     try:
         blog = Query(Blog).equal_to("objectId", blog_id).first()

@@ -1,11 +1,13 @@
 # coding: utf-8
 
-import os, time
+import os, sys, time
 from datetime import datetime
 from leancloud import Engine
 
 from app import app
 
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 engine = Engine(app)
 
@@ -17,17 +19,21 @@ def hello(**params):
     else:
         return 'Hello, LeanCloud!'
 
-@engine.define
+@app.template_filter('datetime')
 def datetime_filter(t):
+    if isinstance(t, datetime):
+        t = time.mktime(t.timetuple())
     delta = int(time.time() - t)
     if delta < 60:
-        return u'1·ÖÖÓÇ°'
+        return '1åˆ†é’Ÿå‰'
     if delta < 3600:
-        return u'%s·ÖÖÓÇ°' % (delta // 60)
+        return '%såˆ†é’Ÿå‰' % (delta // 60)
     if delta < 86400:
-        return u'%sÐ¡Ê±Ç°' % (delta // 3600)
+        return '%så°æ—¶å‰' % (delta // 3600)
     if delta < 604800:
-        return u'%sÌìÇ°' % (delta // 86400)
+        return '%så¤©å‰' % (delta // 86400)
     dt = datetime.fromtimestamp(t)
-    return u'%sÄê%sÔÂ%sÈÕ' % (dt.year, dt.month, dt.day)
+    return '%så¹´%sæœˆ%sæ—¥' % (dt.year, dt.month, dt.day)
+
+#app.jinja_env.filters['datetime'] = datetime_filter
 

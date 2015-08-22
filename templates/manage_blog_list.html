@@ -22,11 +22,11 @@ function initVM(data) {
                 gotoPage(this.page.page_index + 1);
             },
             edit_blog: function (blog) {
-                location.assign('/manage/blogs/edit/' + blog.id);
+                location.assign('/manage/blog/' + blog.id + '/edit');
             },
             delete_blog: function (blog) {
                 showConfirm('确认删除？', '确认要删除“' + blog.name + '”？删除后不可恢复！', function () {
-                    postApi('/api/blogs/' + blog.id + '/delete', {}, function (err, r) {
+                    postApi('/blog/' + blog.id + '/delete', {}, function (err, r) {
                         if (err) {
                             return showError(err);
                         }
@@ -39,7 +39,7 @@ function initVM(data) {
 }
 
 $(function() {
-    getApi('/api/blogs?page={{ page_index }}', function (err, results) {
+    getApi('/blog/list?page={{ page_index }}', function (err, results) {
         if (err) {
             return showError(err);
         }
@@ -69,7 +69,7 @@ $(function() {
     </div>
 
     <div id="div-blogs" class="uk-width-1-1" style="display:none">
-        <a href="/manage/blogs/create" class="uk-button uk-button-primary"><i class="uk-icon-plus"></i> 新日志</a>
+        <a href="/manage/blog/create" class="uk-button uk-button-primary"><i class="uk-icon-plus"></i> 新日志</a>
 
         <table class="uk-table uk-table-hover">
             <thead>
