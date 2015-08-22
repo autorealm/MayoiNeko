@@ -9,6 +9,7 @@ from flask import render_template
 
 from views.todos import todos_view
 from views.blogs import blogs_view
+from views.manages import manages_view
 
 from develop.apis import apis
 

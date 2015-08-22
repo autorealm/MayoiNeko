@@ -9,7 +9,7 @@ from flask import redirect
 from flask import url_for
 from flask import render_template
 
-from develop.models import Blog, Comments, Page, Err
+from ..develop.models import Blog, Comments, Page, Err
 
 manages_view = Blueprint('manages', __name__)
 

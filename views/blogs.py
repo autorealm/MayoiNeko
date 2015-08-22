@@ -1,5 +1,6 @@
 # coding: utf-8
 
+import sys
 from leancloud import Object
 from leancloud import User
 from leancloud import Query
@@ -10,9 +11,9 @@ from flask import redirect
 from flask import url_for
 from flask import render_template
 
-from develop.models import Blog, Comments, Page, Err
-
-from develop.markdown2 import markdown2
+sys.path.append("..")
+from ..develop.models import Blog, Comments, Page, Err
+from ..develop.markdown2 import markdown2
 
 
 blogs_view = Blueprint('blogs', __name__)
