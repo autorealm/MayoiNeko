@@ -7,8 +7,7 @@ from leancloud import User
 from leancloud import Query
 from leancloud import LeanCloudError
 from flask import request
-from flask import response
-from flask import cookie
+from flask import make_response
 
 from develop.models import Blog, Comments, Page, Err
 
@@ -58,6 +57,7 @@ def sign_in(username, password):
         raise e
     max_age = 604800 if remember=='true' else None
     cookie = make_signed_cookie(user.id, user.password, max_age)
+    response = make_response();
     response.set_cookie(_COOKIE_NAME, cookie, max_age=max_age)
     user.password = '******'
     return user
@@ -80,7 +80,7 @@ def sign_up(username, password, email):
     return user
 
 def sign_out():
-    response.delete_cookie(_COOKIE_NAME)
+    make_response().set_cookie(_COOKIE_NAME, '')
 
 
 def update_blog(blog_id, name='', summary='', content=''):
