@@ -11,7 +11,7 @@ from views.todos import todos_view
 from views.blogs import blogs_view
 from views.manages import manages_view
 
-from develop.apis import apis
+import develop.apis
 
 app = Flask(__name__)
 

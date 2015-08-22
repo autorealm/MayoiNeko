@@ -8,6 +8,7 @@ from leancloud import Query
 from leancloud import LeanCloudError
 from flask import request
 from flask import make_response
+from flask import session
 
 from develop.models import Blog, Comments, Page, Err
 
@@ -47,6 +48,9 @@ def check_login():
     cookie = request.cookies.get(_COOKIE_NAME)
     if cookie:
         user = parse_signed_cookie(cookie)
+    if user is None:
+        if _COOKIE_NAME in session:
+            user = parse_signed_cookie(session[_COOKIE_NAME])
     request.user = user
     return user;
 
@@ -59,6 +63,8 @@ def sign_in(username, password):
     cookie = make_signed_cookie(user.id, user.password, max_age)
     response = make_response();
     response.set_cookie(_COOKIE_NAME, cookie, max_age=max_age)
+    session.permanent = False
+    session[_COOKIE_NAME] = cookie
     user.password = '******'
     return user
 
@@ -80,7 +86,8 @@ def sign_up(username, password, email):
     return user
 
 def sign_out():
-    make_response().set_cookie(_COOKIE_NAME, '')
+    make_response().set_cookie(_COOKIE_NAME, None)
+    session.pop(_COOKIE_NAME, None)
 
 
 def update_blog(blog_id, name='', summary='', content=''):
