@@ -1,5 +1,6 @@
 # coding: utf-8
 
+import sys;
 from leancloud import Object
 from leancloud import Query
 from leancloud import LeanCloudError
@@ -9,6 +10,7 @@ from flask import redirect
 from flask import url_for
 from flask import render_template
 
+sys.path.append('..');
 from develop.models import Blog, Comments, Page, Err
 
 manages_view = Blueprint('manages', __name__)
