@@ -41,7 +41,7 @@ def manage_blogs():
 def manage_blog_create():
     return render_template('manage_blog_edit.html', id=None, action='/blog/0/update', redirect='/manage/blogs', user=request.user)
 
-@manages_view.route('/blog/edit/:blog_id')
+@manages_view.route('/blog/edit/<blog_id>')
 def manage_blog_edit(blog_id):
     blog = Query(Blog).get(blog_id)
     if blog is None:

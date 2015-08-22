@@ -14,6 +14,8 @@ from views.manages import manages_view
 import develop.apis
 
 app = Flask(__name__)
+app.debug = True
+
 
 # 动态路由
 app.register_blueprint(todos_view, url_prefix='/todos')
