@@ -37,11 +37,11 @@ def manage_comments():
 def manage_blogs():
     return render_template('manage_blog_list.html', page_index=_get_page_index(), user=request.user)
 
-@manages_view('/blog/create')
+@manages_view.route('/blog/create')
 def manage_blog_create():
     return render_template('manage_blog_edit.html', id=None, action='/blog/0/update', redirect='/manage/blogs', user=request.user)
 
-@app.route('/blog/edit/:blog_id')
+@manages_view.route('/blog/edit/:blog_id')
 def manage_blog_edit(blog_id):
     blog = Query(Blog).get(blog_id)
     if blog is None:
