@@ -36,8 +36,8 @@ $(function () {
                     return showError('两次输入的口令不一致');
                 }
                 startLoading();
-                postApi('/api/users', {
-                    name: this.name,
+                postApi('/user/signup', {
+                    username: this.name,
                     email: this.email.trim().toLowerCase(),
                     password: CryptoJS.MD5(this.password1).toString(),
                 }, function (err, r) {

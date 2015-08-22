@@ -23,6 +23,11 @@ def _now():
 
 
 def _dump(obj):
+    if isinstance(obj, list):
+        objs = []
+        for o in obj:
+            objs.append(_dump(o))
+        return objs
     if isinstance(obj, Page):
         return {
             'page_index': obj.page_index,
@@ -46,6 +51,13 @@ def _dump(obj):
             #'user_name': obj.get('user').get('username'),
             'content': obj.get('content'),
             'created_at': str(obj.created_at)
+        }
+    if isinstance(obj, User):
+        return {
+            'id': obj.id,
+            'username': obj.get('username'),
+            'password': obj.get('password'),
+            'email': obj.get('email')
         }
     raise TypeError('%s is not JSON serializable' % obj)
 
@@ -101,18 +113,18 @@ def check_login():
     return user;
 
 @api
-def sign_in(username, password):
+def sign_in(username, password, remember='false'):
     try:
-        user = User().login(username, password)
+        User().login(username, password)
+        user = Query(User).equal_to("username", username).first()
     except LeanCloudError, e:
         raise e
     max_age = 604800 if remember=='true' else None
-    cookie = make_signed_cookie(user.id, user.password, max_age)
+    cookie = make_signed_cookie(user.id, user.get('password'), max_age)
     response = make_response();
     response.set_cookie(_COOKIE_NAME, cookie, max_age=max_age)
     session.permanent = False
     session[_COOKIE_NAME] = cookie
-    user.password = '******'
     return user
 
 _RE_EMAIL = re.compile(r'^[a-z0-9\.\-\_]+\@[a-z0-9\-\_]+(\.[a-z0-9\-\_]+){1,4}$')
@@ -138,6 +150,34 @@ def sign_out():
     session.pop(_COOKIE_NAME, None)
 
 @api
+def list_users():
+    page_index = 1
+    page_size = 26
+    page = None
+    users = []
+    try:
+        page_index = int(request.args.get('page', '1'))
+    except ValueError:
+        pass
+    try:
+        total = Query(User).count();
+        page = Page(total, page_index, page_size)
+        users = Query(User).descending('createdAt').skip(page.offset).limit(page.page_size).find()
+    except LeanCloudError, e:
+        if e.code == 101:  # 服务端对应的 Class 还没创建
+            users = []
+        else:
+            raise e
+    return dict(users=users, page=page)
+
+@api
+def get_user(user_id):
+    user = Query(User).get(user_id)
+    if user:
+        return user
+    raise Err('value:notfound', 'user', 'user not found.')
+
+@api
 def list_blogs():
     format = request.args.get('format', '')
     page_index = 1
@@ -157,6 +197,7 @@ def list_blogs():
             blogs = []
         else:
             raise e
+    #logging.debug(blogs)
     if format=='html':
         for blog in blogs:
             blog.content = markdown2.markdown(blog.content)
@@ -226,6 +267,29 @@ def comment(blog_id, content=''):
     return comment
 
 @api
+def get_comments(blog_id):
+    blog = None
+    comments = None
+    user = None
+    try:
+        blog = Query(Blog).equal_to("objectId", blog_id).first()
+        if blog is None:
+            raise Err('value:notfound', 'blog', 'blog not found.')
+        try:
+            comments = Query(Comments).equal_to("blog", blog).descending('createdAt').find()
+        except LeanCloudError, e:
+            pass
+    except LeanCloudError, e:
+        if e.code == 101:  # 服务端对应的 Class 还没创建
+            blog = {}
+        else:
+            raise e
+    blog.set('html_content', markdown(blog.get('content')))
+    if comments is None:
+        comments = []
+    return comments
+
+@api
 def update_comment(comment_id, content=''):
     #if user is None:
         #raise Err('value:notfound', 'user', 'user not found.')
@@ -246,3 +310,24 @@ def delete_comment(comment_id):
         raise Err('value:notfound', 'comment', 'comment not found.')
     comment.destroy()
     return comment
+
+@api
+def list_comments():
+    page_index = 1
+    page_size = 26
+    page = None
+    comments = []
+    try:
+        page_index = int(request.args.get('page', '1'))
+    except ValueError:
+        pass
+    try:
+        total = Query(Comments).count();
+        page = Page(total, page_index, page_size)
+        comments = Query(Comments).descending('createdAt').skip(page.offset).limit(page.page_size).find()
+    except LeanCloudError, e:
+        if e.code == 101:  # 服务端对应的 Class 还没创建
+            comments = []
+        else:
+            raise e
+    return dict(comments=comments, page=page)

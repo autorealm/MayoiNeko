@@ -41,12 +41,12 @@ def manage_blogs():
 def manage_blog_create():
     return render_template('manage_blog_edit.html', id=None, action='/blog/0/update', redirect='/manage/blogs', user=None)
 
-@manages_view.route('/blog/edit/<blog_id>')
+@manages_view.route('/blog/<blog_id>')
 def manage_blog_edit(blog_id):
     blog = Query(Blog).get(blog_id)
     if blog is None:
         raise notfound()
-    return render_template('manage_blog_edit.html', id=blog.id, name=blog.name, summary=blog.summary, content=blog.content, action='/blog/%s/update' % blog_id, redirect='/manage/blogs', user=None)
+    return render_template('manage_blog_edit.html', id=blog.id, name=blog.get('name'), summary=blog.get('summary'), content=blog.get('content'), action='/blog/%s/update' % blog_id, redirect='/manage/blogs', user=None)
 
 @manages_view.route('/users')
 def manage_users():

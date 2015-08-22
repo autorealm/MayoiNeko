@@ -37,7 +37,7 @@ function initVM(data) {
 }
 
 $(function() {
-    getApi('/api/comments?page={{ page_index }}', function (err, results) {
+    getApi('/comments?page={{ page_index }}', function (err, results) {
         if (err) {
             return showError(err);
         }
@@ -85,7 +85,7 @@ $(function() {
                         <span v-text="comment.content"></span>
                     </td>
                     <td>
-                        <span v-text="comment.created_at.toDateTime()"></span>
+                        <span v-text="comment.created_at"></span>
                     </td>
                     <td>
                         <a href="#0" v-on="click: delete_comment(comment)"><i class="uk-icon-trash-o"></i>

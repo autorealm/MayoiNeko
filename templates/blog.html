@@ -6,7 +6,7 @@
 
 <script>
 
-var comment_url = '/api/blogs/{{ blog.id }}/comments';
+var comment_url = '/blog/{{ blog.id }}/comment';
 
 $(function () {
     $('#form-comment').submit(function (e) {
@@ -35,9 +35,9 @@ $(function () {
 
     <div class="uk-width-medium-3-4">
         <article class="uk-article">
-            <h2>{{ blog.name }}</h2>
+            <h2>{{ blog.get('name') }}</h2>
             <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}</p>
-            <p>{{ blog.html_content|safe }}</p>
+            <p>{{ blog.get('html_content')|safe }}</p>
         </article>
 
         <hr class="uk-article-divider">
@@ -78,7 +78,7 @@ $(function () {
                         <p class="uk-comment-meta">{{ comment.created_at|datetime }}</p>
                     </header>
                     <div class="uk-comment-body">
-                        <p>{{ comment.content }}</p>
+                        <p>{{ comment.get('content') }}</p>
                     </div>
                 </article>
             </li>
@@ -92,8 +92,8 @@ $(function () {
     <div class="uk-width-medium-1-4">
         <div class="uk-panel uk-panel-box">
             <div class="uk-text-center">
-                <img class="uk-border-circle" width="120" height="120" src="{{ blog.user_image }}">
-                <h3>{{ blog.user_name }}</h3>
+                <img class="uk-border-circle" width="120" height="120" src="{{ blog.get('user_image') }}">
+                <h3>{{ blog.get('user_name') }}</h3>
             </div>
         </div>
         <div class="uk-panel uk-panel-header">

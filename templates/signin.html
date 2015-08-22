@@ -20,18 +20,18 @@ $(function() {
     var vm = new Vue({
         el: '#form-signin',
         data: {
-            email: '',
+            username: '',
             password: '',
             remember: false
         },
         methods: {
             submit: function (event) {
                 event.preventDefault();
-                var email = this.email.trim().toLowerCase();
+                var username = this.username.trim().toLowerCase();
                 showError();
                 startLoading();
-                postApi('/api/authenticate', {
-                    email: email,
+                postApi('/user/login', {
+                    username: username,
                     password: CryptoJS.MD5(this.password).toString(),
                     remember: this.remember
                 }, function (err, result) {
@@ -60,13 +60,13 @@ $(function() {
                 <div class="uk-form-row">
                     <div class="uk-form-icon uk-width-1-1">
                         <i class="uk-icon-envelope-o"></i>
-                        <input v-model="email" name="email" type="text" placeholder="电子邮件" maxlength="50" class="uk-width-1-1 uk-form-large">
+                        <input v-model="username" name="username" type="text" placeholder="用户名" maxlength="50" class="uk-width-1-1 uk-form-large">
                     </div>
                 </div>
                 <div class="uk-form-row">
                     <div class="uk-form-icon uk-width-1-1">
                         <i class="uk-icon-lock"></i>
-                        <input v-model="password" name="password" type="password" placeholder="口令" maxlength="50" class="uk-width-1-1 uk-form-large">
+                        <input v-model="password" name="password" type="password" placeholder="密码" maxlength="50" class="uk-width-1-1 uk-form-large">
                     </div>
                 </div>
                 <div class="uk-form-row">

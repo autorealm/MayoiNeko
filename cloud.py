@@ -11,6 +11,7 @@ sys.setdefaultencoding('utf8')
 
 engine = Engine(app)
 
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 @engine.define
 def hello(**params):
@@ -23,6 +24,8 @@ def hello(**params):
 def datetime_filter(t):
     if isinstance(t, datetime):
         t = time.mktime(t.timetuple())
+    if not t:
+        return '未知时间'
     delta = int(time.time() - t)
     if delta < 60:
         return '1分钟前'

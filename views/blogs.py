@@ -16,7 +16,7 @@ sys.setdefaultencoding('utf8')
 
 sys.path.append("..")
 from develop.models import Blog, Comments, Page, Err
-import develop.markdown2
+from develop.markdown2 import markdown
 
 
 blogs_view = Blueprint('blogs', __name__)
@@ -42,20 +42,6 @@ def list():
             raise e
     return render_template('blogs.html', blogs=blogs, page=page)
 
-@blogs_view.route('<blog_id>')
-def show(blog_id):
-    try:
-        blog = Query(Blog).equal_to("objectId", blog_id).first()
-        if blog is None:
-            raise Err('value:notfound', 'blog', 'blog not found.')
-        comments = Query(Comments).equal_to("blog", blog).descending('createdAt').find()
-    except LeanCloudError, e:
-        if e.code == 101:  # 服务端对应的 Class 还没创建
-            blog = []
-        else:
-            raise e
-    blog.html_content = markdown2.markdown(blog.content)
-    return render_template('blog.html', blog=blog, comments=comments, user=user)
 
 @blogs_view.route('', methods=['POST'])
 def add():
