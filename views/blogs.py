@@ -12,8 +12,8 @@ from flask import url_for
 from flask import render_template
 
 sys.path.append("..")
-from ..develop.models import Blog, Comments, Page, Err
-from ..develop.markdown2 import markdown2
+from develop.models import Blog, Comments, Page, Err
+from develop.markdown2 import markdown2
 
 
 blogs_view = Blueprint('blogs', __name__)
