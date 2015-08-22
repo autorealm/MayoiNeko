@@ -13,7 +13,7 @@ from flask import render_template
 
 sys.path.append("..")
 from develop.models import Blog, Comments, Page, Err
-from develop.markdown2 import markdown2
+import develop.markdown2
 
 
 blogs_view = Blueprint('blogs', __name__)
