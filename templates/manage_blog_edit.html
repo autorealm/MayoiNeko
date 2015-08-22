@@ -39,7 +39,7 @@ function initVue(blog) {
 
 $(function () {
     startLoading();
-    getApi('/blog/{{ id }}', function (err, blog) {
+    getApi('/blog/{{ id }}/get', function (err, blog) {
         if (err) {
             showError(err);
         }

@@ -164,7 +164,7 @@ def list_users():
         page = Page(total, page_index, page_size)
         users = Query(User).descending('createdAt').skip(page.offset).limit(page.page_size).find()
     except LeanCloudError, e:
-        if e.code == 101:  # 服务端对应的 Class 还没创建
+        if e.code == 101:  # 鏈嶅姟绔搴旂殑 Class 杩樻病鍒涘缓
             users = []
         else:
             raise e
@@ -193,7 +193,7 @@ def list_blogs():
         page = Page(total, page_index, page_size)
         blogs = Query(Blog).descending('createdAt').skip(page.offset).limit(page.page_size).find()
     except LeanCloudError, e:
-        if e.code == 101:  # 服务端对应的 Class 还没创建
+        if e.code == 101:  # 鏈嶅姟绔搴旂殑 Class 杩樻病鍒涘缓
             blogs = []
         else:
             raise e
@@ -280,7 +280,7 @@ def get_comments(blog_id):
         except LeanCloudError, e:
             pass
     except LeanCloudError, e:
-        if e.code == 101:  # 服务端对应的 Class 还没创建
+        if e.code == 101:  # 鏈嶅姟绔搴旂殑 Class 杩樻病鍒涘缓
             blog = {}
         else:
             raise e
@@ -326,7 +326,7 @@ def list_comments():
         page = Page(total, page_index, page_size)
         comments = Query(Comments).descending('createdAt').skip(page.offset).limit(page.page_size).find()
     except LeanCloudError, e:
-        if e.code == 101:  # 服务端对应的 Class 还没创建
+        if e.code == 101:  # 鏈嶅姟绔搴旂殑 Class 杩樻病鍒涘缓
             comments = []
         else:
             raise e

@@ -8,13 +8,13 @@ from wsgiref import simple_server
 from app import app
 from cloud import engine
 
-APP_ID = os.environ['LC_APP_ID']
-MASTER_KEY = os.environ['LC_APP_MASTER_KEY']
-PORT = int(os.environ['LC_APP_PORT'])
+#APP_ID = os.environ['LC_APP_ID']
+#MASTER_KEY = os.environ['LC_APP_MASTER_KEY']
+#PORT = int(os.environ['LC_APP_PORT'])
 
-#APP_ID = 'm6i9vkd1ia02nngqmf00q7h8'
-#MASTER_KEY = 'm9p1z9fvh0cmld8y09vwozel'
-#PORT = 3000
+APP_ID = 'm6i9vkd1ia02nngqmf00q7h8'
+MASTER_KEY = 'm9p1z9fvh0cmld8y09vwozel'
+PORT = 3000
 
 #if os.environ.get('LC_APP_PROD') == '1':
     # 当前为生产环境
