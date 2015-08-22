@@ -19,8 +19,8 @@ app.debug = True
 
 # 动态路由
 app.register_blueprint(todos_view, url_prefix='/todos')
-app.register_blueprint(blogs_view, url_prefix='/blogs')
-app.register_blueprint(manages_view, url_prefix='/manages')
+#app.register_blueprint(blogs_view, url_prefix='/blogs')
+#app.register_blueprint(manages_view, url_prefix='/manages')
 
 
 @app.route('/')
