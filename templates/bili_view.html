@@ -40,7 +40,7 @@ $(function () {
             <p><img class="" width="100%" height="auto" src="{{ item.cover }}"></p>
             <p>{{ item.description|safe }}</p>
             <p>观看：{{ item.guankan }} | 评论：{{ item.commentNumber }} | 弹幕：{{ item.danmu }} | 收藏：{{ item.shoucang }}</p>
-            <p><a href="http://www.bilibili.com/video/av{{ item.aid }}">播放</a>
+            <p><a target="_blank" href="http://www.bilibili.com/video/av{{ item.aid }}">播放</a>
             {% for src in item.src %}
             <a href="{{ src }}">下载{{ loop.index }}</a>
             {% endfor %}

@@ -212,7 +212,7 @@ def GetVideoInfo(aid, appkey,page = 1, AppSecret=None, fav = None):
         for tag in taglist.split(','):
             video.tag.append(tag)
     video.cover = jsoninfo.Getvalue('pic')
-    video.author = User(jsoninfo.Getvalue('mid'),jsoninfo.Getvalue('author'))
+    video.author = GetUserInfoBymid(jsoninfo.Getvalue('mid')) #User(jsoninfo.Getvalue('mid'),jsoninfo.Getvalue('author'))
     video.page = jsoninfo.Getvalue('pages')
     video.date = jsoninfo.Getvalue('created_at')
     video.credit = jsoninfo.Getvalue('credit')
