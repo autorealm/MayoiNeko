@@ -40,6 +40,9 @@ def time():
 def test():
     return str(list_blogs())
 
+@app.route('/search')
+def search():
+    return redirect('/', 401)
 
 @app.route('/signin')
 def signin():

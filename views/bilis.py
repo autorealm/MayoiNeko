@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import sys, json
+import sys, re, json
 from leancloud import Object
 from leancloud import User
 from leancloud import Query
@@ -43,7 +43,7 @@ def list():
     try:
         bilis = GetRank(APPKEY, tid, days=days, page=page_index, pagesize=page_size, order=order, AppSecret=APPSEC)
         total = len(bilis)
-        return str(total);
+        #return str(total);
         page = Page(total, page_index, page_size)
     except:
         raise
@@ -62,6 +62,9 @@ def search():
         order = str(request.args.get('order', 'default'))
     except ValueError:
         pass
+    regex_match = re.findall('av(\\d+)', keyword)
+    if regex_match:
+        return redirect(url_for('.view', video_id=regex_match[0]))
     try:
         bilis = biliVideoSearch(APPKEY, APPSEC, keyword, order=order, page=page_index, pagesize=page_size)
         total = len(bilis)

@@ -295,6 +295,8 @@ def biliVideoSearch(appkey, AppSecret, keyword, order = 'default', pagesize = 20
     url =  'http://api.bilibili.cn/search?' + GetSign(paras, appkey, AppSecret)
     jsoninfo = JsonInfo(url)
     videolist = []
+    if not jsoninfo.Getvalue('result'):
+        return videolist
     for video_idx in jsoninfo.Getvalue('result'):
         if video_idx['type'] != 'video':
             continue
