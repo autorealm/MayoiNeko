@@ -181,10 +181,10 @@ def GetAllComment(aid, order = None):
     if commentList.page == 1:
         return commentList
     for p in range(2,commentList.page+1):
-        t_commentlist = GetComment(aid=aid,pagesize=MaxPageSize,page=p,ver=ver,order=order)
+        t_commentlist = GetComment(aid=aid,pagesize=MaxPageSize,page=p,order=order)
         for liuyan in t_commentlist.comments:
             commentList.comments.append(liuyan)
-        time.sleep(0.5)
+        time.sleep(0.15)
     return commentList
 
 def GetVideoInfo(aid, appkey,page = 1, AppSecret=None, fav = None):
@@ -221,7 +221,7 @@ def GetVideoInfo(aid, appkey,page = 1, AppSecret=None, fav = None):
     video.cid = jsoninfo.Getvalue('cid')
     video.offsite = jsoninfo.Getvalue('offsite')
     video.partname = jsoninfo.Getvalue('partname')
-    video.src = GetBilibiliUrl(appkey, AppSecret) #jsoninfo.Getvalue('src')
+    video.src = jsoninfo.Getvalue('src')
     video.tid = jsoninfo.Getvalue('tid')
     video.typename = jsoninfo.Getvalue('typename')
     video.instant_server = jsoninfo.Getvalue('instant_server')

@@ -80,12 +80,14 @@ $(function () {
             <li>
                 <article class="uk-comment">
                     <header class="uk-comment-header">
-                        <img class="uk-comment-avatar uk-border-circle" width="50" height="50" src="{{ comment.user_image }}">
-                        <h4 class="uk-comment-title">{{ comment.user_name }} {% if comment.user_id==item.user_id %}(作者){% endif %}</h4>
-                        <p class="uk-comment-meta">{{ comment.created_at|datetime }}</p>
+                        <img class="uk-comment-avatar uk-border-circle" width="50" height="50" src="{{ comment.post_user.avatar }}">
+                        <a target="_blank" href="http://space.bilibili.tv/{{ comment.post_user.mid }}">
+                        <h4 class="uk-comment-title">{{ comment.post_user.name }}</h4>
+                        </a>
+                        <p class="uk-comment-meta" title="{{ comment.fbid}}">#{{ comment.lv }}</p>
                     </header>
                     <div class="uk-comment-body">
-                        <p>{{ comment.get('content') }}</p>
+                        <p>{{ comment.msg }}</p>
                     </div>
                 </article>
             </li>
@@ -100,16 +102,16 @@ $(function () {
         <div class="uk-panel uk-panel-box">
             <div class="uk-text-center">
                 <img class="uk-border-circle" width="120" height="120" src="{{ item.author.avatar or '' }}">
-                <a target=_blank href="{{ item.author.GetSpace() }}"><h3>{{ item.author.name }}</h3></a>
+                <a target="_blank" href="{{ item.author.GetSpace() }}"><h3>{{ item.author.name }}</h3></a>
                 <p>{{ item.author.description }}</p>
             </div>
         </div>
         <div class="uk-panel uk-panel-header">
             <h3 class="uk-panel-title">友情链接</h3>
             <ul class="uk-list uk-list-line">
-                <li><i class="uk-icon-link"></i> <a href="#">编程</a></li>
-                <li><i class="uk-icon-link"></i> <a href="#">思考</a></li>
-                <li><i class="uk-icon-link"></i> <a href="#">读书</a></li>
+                <li><i class="uk-icon-link"></i> <a href="http://voiux.com"> Voiux</a></li>
+                <li><i class="uk-icon-link"></i> <a href="http://fm.voiux.com"> VoiuxFM</a></li>
+                <li><i class="uk-icon-link"></i> <a href="http://no.voiux.com"> Novious</a></li>
             </ul>
         </div>
     </div>

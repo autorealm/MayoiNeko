@@ -65,6 +65,10 @@ def search():
     regex_match = re.findall('av(\\d+)', keyword)
     if regex_match:
         return redirect(url_for('.view', video_id=regex_match[0]))
+    #regex_match = re.findall('http:/*[^/]+/video/av(\\d+)(/|/index.html|/index_(\\d+).html)?(\\?|#|$)',keyword)
+    #if regex_match:
+        #return redirect(url_for('.view', video_id=regex_match[0][0]))
+    
     try:
         bilis = biliVideoSearch(APPKEY, APPSEC, keyword, order=order, page=page_index, pagesize=page_size)
         total = len(bilis)
@@ -78,9 +82,10 @@ def view(video_id):
     fav = ''
     try:
         video = GetBilibiliVideo(video_id, APPKEY, AppSecret=APPSEC)
+        comments = GetComment(video_id, pagesize=100)
     except:
         raise
-    return render_template('bili_view.html', item=video)
+    return render_template('bili_view.html', item=video, comments=comments.comments)
 
 @bilis_view.route('', methods=['POST'])
 def save():
