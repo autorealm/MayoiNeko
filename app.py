@@ -16,6 +16,7 @@ from views.bilis import bilis_view
 
 from develop.apis import *
 from develop.markdown2 import markdown
+from develop.cloudmusic import NetEase
 
 app = Flask(__name__)
 app.debug = True
@@ -38,7 +39,8 @@ def time():
 
 @app.route('/test')
 def test():
-    return str(list_blogs())
+    cloudmusic = NetEase()
+    return str(cloudmusic.search('miku'))
 
 @app.route('/search')
 def search():
