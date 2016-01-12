@@ -13,6 +13,7 @@ from views.todos import todos_view
 from views.blogs import blogs_view
 from views.manages import manages_view
 from views.bilis import bilis_view
+from views.cps import cps_view
 
 from develop.apis import *
 from develop.markdown2 import markdown
@@ -27,6 +28,7 @@ app.register_blueprint(todos_view, url_prefix='/todos')
 app.register_blueprint(blogs_view, url_prefix='/blogs')
 app.register_blueprint(manages_view, url_prefix='/manage')
 app.register_blueprint(bilis_view, url_prefix='/bili')
+app.register_blueprint(cps_view, url_prefix='/cps')
 
 @app.route('/')
 def index():

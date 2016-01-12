@@ -1,0 +1,482 @@
+{% extends "__layout__.html" %}
+
+{% block title %}Index{% endblock %}
+{% block meta %}
+    
+    
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="assets/js/vendor/videobackground/css/jquery.videobackground.css">
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap-checkbox.css">
+
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="assets/js/vendor/sparkline/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/nicescroll/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/animate-numbers/jquery.animateNumbers.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/videobackground/jquery.videobackground.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/blockui/jquery.blockUI.js"></script>
+{% endblock %}
+{% block head %}
+    {{ super() }}
+    
+{% endblock %}
+{% block footer %}
+    {{ super() }}
+    <script>
+
+    $(function(){
+     
+      
+    })
+      
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <!-- row -->
+    <div class="row">
+
+      <!-- col 6 -->
+      <div class="col-md-6">
+
+
+
+        <!-- tile -->
+        <section class="tile color transparent-black">
+
+
+
+          <!-- tile header -->
+          <div class="tile-header">
+            <h1><strong>Button</strong> Types</h1>
+            <div class="controls">
+              <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+              <a href="#" class="remove"><i class="fa fa-times"></i></a>
+            </div>
+          </div>
+          <!-- /tile header -->
+
+          <!-- tile body -->
+          <div class="tile-body ">
+            
+           <h4><strong>Button</strong> Sizing</h4>
+            <p>
+              <button type="button" class="btn btn-primary btn-lg margin-bottom-20">Large button</button>
+              <button type="button" class="btn btn-default btn-lg margin-bottom-20">Large button</button>
+              <button type="button" class="btn btn-primary margin-bottom-20">Default button</button>
+              <button type="button" class="btn btn-default margin-bottom-20">Default button</button>
+              <button type="button" class="btn btn-primary btn-sm margin-bottom-20">Small button</button>
+              <button type="button" class="btn btn-default btn-sm margin-bottom-20">Small button</button>
+              <button type="button" class="btn btn-primary btn-xs margin-bottom-20">Extra small button</button>
+              <button type="button" class="btn btn-default btn-xs margin-bottom-20">Extra small button</button>
+            </p>
+
+            <h4><strong>Button</strong> Colors</h4>
+            <p>
+              <button type="button" class="btn btn-default margin-bottom-20">Default</button>
+              <button type="button" class="btn btn-primary margin-bottom-20">Primary</button>
+              <button type="button" class="btn btn-success margin-bottom-20">Success</button>
+              <button type="button" class="btn btn-info margin-bottom-20">Info</button>
+              <button type="button" class="btn btn-warning margin-bottom-20">Warning</button>
+              <button type="button" class="btn btn-danger margin-bottom-20">Danger</button>
+              <button type="button" class="btn btn-red margin-bottom-20">Red</button>
+              <button type="button" class="btn btn-cyan margin-bottom-20">Cyan</button>
+              <button type="button" class="btn btn-green margin-bottom-20">Green</button>
+              <button type="button" class="btn btn-orange margin-bottom-20">Orange</button>
+              <button type="button" class="btn btn-amethyst margin-bottom-20">Amethyst</button>
+              <button type="button" class="btn btn-greensea margin-bottom-20">Greensea</button>
+              <button type="button" class="btn btn-dutch margin-bottom-20">Dutch</button>
+              <button type="button" class="btn btn-hotpink margin-bottom-20">Hotpink</button>
+              <button type="button" class="btn btn-drank margin-bottom-20">Drank</button>
+              <button type="button" class="btn btn-blue margin-bottom-20">Blue</button>
+              <button type="button" class="btn btn-redbrown margin-bottom-20">Redbrown</button>
+              <button type="button" class="btn btn-slategray margin-bottom-20">Slategray</button>
+              <button type="button" class="btn btn-link margin-bottom-20">Link</button>
+            </p>
+
+          </div>
+          <!-- /tile body -->
+          
+        
+
+
+        </section>
+        <!-- /tile -->
+
+
+
+        <!-- tile -->
+        <section class="tile color transparent-black">
+
+
+
+          <!-- tile header -->
+          <div class="tile-header">
+            <h1><strong>Button</strong> Dropdowns</h1>
+            <div class="controls">
+              <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+              <a href="#" class="remove"><i class="fa fa-times"></i></a>
+            </div>
+          </div>
+          <!-- /tile header -->
+
+          <!-- tile body -->
+          <div class="tile-body ">
+            
+           <!-- Single button -->
+            <div class="btn-group margin-bottom-20">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Single <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </div>
+
+            <!-- Single button -->
+            <div class="btn-group margin-bottom-20">
+              <button type="button" class="btn btn-red dropdown-toggle" data-toggle="dropdown">
+                Single <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </div>
+            
+            <!-- Split button -->
+            <div class="btn-group margin-bottom-20">
+              <button type="button" class="btn btn-default">Split</button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </div>
+            
+            <!-- Split button -->
+            <div class="btn-group margin-bottom-20">
+              <button type="button" class="btn btn-red">Split</button>
+              <button type="button" class="btn btn-red dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </div>
+
+            <!-- Single button -->
+            <div class="btn-group dropup margin-bottom-20">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Single Dropup <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </div>
+
+            <!-- Single button -->
+            <div class="btn-group dropup margin-bottom-20">
+              <button type="button" class="btn btn-red dropdown-toggle" data-toggle="dropdown">
+                Single Dropup <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </div>
+            
+            <!-- Split button -->
+            <div class="btn-group dropup margin-bottom-20">
+              <button type="button" class="btn btn-default">Split Dropup</button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </div>
+            
+            <!-- Split button -->
+            <div class="btn-group dropup margin-bottom-20">
+              <button type="button" class="btn btn-red">Split Dropup</button>
+              <button type="button" class="btn btn-red dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </div>
+
+            <div class="notification notification-cyan">
+              <h4><strong>Dropdown Button</strong> Colors and Sizing</h4>
+              <p>You can use <strong>same color and size classes</strong> as with normal buttons.</p>
+            </div>
+
+          </div>
+          <!-- /tile body -->
+          
+        
+
+
+        </section>
+        <!-- /tile -->
+
+
+
+
+      </div>
+      <!-- /col 6 -->
+
+
+
+      <!-- col 6 -->
+      <div class="col-md-6">
+
+
+
+        <!-- tile -->
+        <section class="tile color transparent-white">
+
+
+
+          <!-- tile header -->
+          <div class="tile-header">
+            <h1><strong>Button</strong> Groups</h1>
+            <div class="controls">
+              <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+              <a href="#" class="remove"><i class="fa fa-times"></i></a>
+            </div>
+          </div>
+          <!-- /tile header -->
+
+          <!-- tile body -->
+          <div class="tile-body ">
+            
+            <div class="row">
+              <div class="col-sm-6">
+
+                <div class="btn-group margin-bottom-20">
+                  <button type="button" class="btn btn-default">Left</button>
+                  <button type="button" class="btn btn-default">Middle</button>
+                  <button type="button" class="btn btn-default">Right</button>
+                </div>
+
+                <div class="btn-toolbar margin-bottom-20" role="toolbar">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default">1</button>
+                    <button type="button" class="btn btn-default">2</button>
+                    <button type="button" class="btn btn-default">3</button>
+                    <button type="button" class="btn btn-default">4</button>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default">5</button>
+                    <button type="button" class="btn btn-default">6</button>
+                    <button type="button" class="btn btn-default">7</button>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default">8</button>
+                  </div>
+                </div>
+
+                <h4><strong>Button Groups</strong> Sizing</h4>
+                <div class="btn-toolbar margin-bottom-20" role="toolbar">
+                  <div class="btn-group btn-group-lg">
+                    <button type="button" class="btn btn-default">Left</button>
+                    <button type="button" class="btn btn-default">Middle</button>
+                    <button type="button" class="btn btn-default">Right</button>
+                  </div>
+                </div>
+
+                <div class="btn-toolbar margin-bottom-20" role="toolbar">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default">Left</button>
+                    <button type="button" class="btn btn-default">Middle</button>
+                    <button type="button" class="btn btn-default">Right</button>
+                  </div>
+                </div>
+
+                <div class="btn-toolbar margin-bottom-20" role="toolbar">
+                  <div class="btn-group btn-group-sm">
+                    <button type="button" class="btn btn-default">Left</button>
+                    <button type="button" class="btn btn-default">Middle</button>
+                    <button type="button" class="btn btn-default">Right</button>
+                  </div>
+                </div>
+
+                <div class="btn-toolbar margin-bottom-20" role="toolbar">
+                  <div class="btn-group btn-group-xs">
+                    <button type="button" class="btn btn-default">Left</button>
+                    <button type="button" class="btn btn-default">Middle</button>
+                    <button type="button" class="btn btn-default">Right</button>
+                  </div>
+                </div>
+                
+                <h4><strong>Nesting</strong></h4>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default">1</button>
+                  <button type="button" class="btn btn-default">2</button>
+
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Dropdown
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-sm-6">
+
+                <h4><strong>Vertical</strong> Variation</h4>
+                <div class="btn-group-vertical">
+                  <button type="button" class="btn btn-default">Button</button>
+                  <button type="button" class="btn btn-default">Button</button>
+                  <div class="btn-group">
+                    <button id="btnGroupVerticalDrop1" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Dropdown
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop1">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>
+                  </div>
+                  <button type="button" class="btn btn-default">Button</button>
+                  <button type="button" class="btn btn-default">Button</button>
+                  <div class="btn-group">
+                    <button id="btnGroupVerticalDrop2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Dropdown
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop2">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Dropdown
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop3">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button id="btnGroupVerticalDrop4" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Dropdown
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop4">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                
+                <h4><strong>Justified</strong> link variation</h4>
+
+                <div class="btn-group btn-group-justified margin-bottom-20">
+                  <a class="btn btn-default" role="button">Left</a>
+                  <a class="btn btn-default" role="button">Middle</a>
+                  <a class="btn btn-default" role="button">Right</a>
+                </div>
+
+                <div class="btn-group btn-group-justified margin-bottom-20">
+                  <a class="btn btn-default" role="button">Left</a>
+                  <a class="btn btn-default" role="button">Middle</a>
+                  <div class="btn-group">
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Right dropdown <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <!-- /tile body -->
+          
+        
+
+
+        </section>
+        <!-- /tile -->
+
+        <div class="notification notification-green">
+          <h4><strong>Icons</strong> List</h4>
+          <p>Check <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">FontAwesome site</a> for icons list.</p>
+        </div>
+
+
+
+
+      </div>
+      <!-- /col 6 -->
+
+
+      
+    </div>
+    <!-- /row -->
+    
+{% endblock %}
